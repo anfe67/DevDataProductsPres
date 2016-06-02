@@ -23,7 +23,7 @@ Global warming is a nowadays a concern for almost everybody, that is why I picke
 * Individual Months global averages 1881 - 2015 (I removed 1880 and 2016 because incomplete)
 * Aggregated seasonal averages (WINTER=DJF, SPRING=MAM, SUMMER=JJA, FALL=SON)
 * The dataset also contains two times the year of the observation, I removed one.
-
+* The Slidify presentation and another copy of the dataset can be found on my github pages at https://github.com/anfe67/DevDataProductsPres/
 ---
 ## Data
 
