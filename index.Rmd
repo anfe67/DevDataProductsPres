@@ -46,6 +46,8 @@ I did not want to apply a model to try to infer how severe the problem is, my ap
 * The application can be found at https://anfe67.shinyapps.io/DevDataProductsProj/
 * This presentation can be found at: http://anfe67.github.io/DevDataProductsPres/
 * The dataset I use can be found on my github page at https://github.com/anfe67/DevDataProductsProj/
+* The Slidify presentation and another copy of the dataset can be found on my github pages at https://github.com/anfe67/DevDataProductsPres/
+
 
 I selected shades of the same color for the seasons: Blues for Winter, Greens for Spring, Reds for Summer and Browns for Autumn (Fall). Seasons are plotted with dotted lines, while months are continuous. You can select the months and seasons with a group of check boxes (checkboxGroupInput) and the time frame by using a “range” type slider.
 
