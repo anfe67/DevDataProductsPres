@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Deviation of world temperature from mean 1951-1980.</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Deviation of world temperature from mean 1951-1980.">
+  <meta name="author" content="Antonio Ferraro">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/default.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <aside class="gdbar">
+    <img src="assets/img/./screenshot.png">
+  </aside>
+  <hgroup class="auto-fadein">
+    <h1>Deviation of world temperature from mean 1951-1980.</h1>
+    <h2>Developing Data Products Shiny App pitch</h2>
+    <p>Antonio Ferraro<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Motivation</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Global warming is a nowadays a concern for almost everybody, that is why I picked this subject. The data used for the application is by NASA GISS Surface Temperature Analysis (GISTEMP).</p>
+
+<p>(<a href="http://data.giss.nasa.gov/gistemp/">http://data.giss.nasa.gov/gistemp/</a>). The values are differences from the means for years 1951-1980 expressed in Farenheit degrees. The Data consists of :</p>
+
+<ul>
+<li>Individual Months global averages 1881 - 2015 (I removed 1880 and 2016 because incomplete)</li>
+<li>Aggregated seasonal averages (WINTER=DJF, SPRING=MAM, SUMMER=JJA, FALL=SON)</li>
+<li>The dataset also contains two times the year of the observation, I removed one.</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Data</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The dataset looks like this, the code shows all my manipulations (basically I just remove columns) :</p>
+
+<pre><code class="r">gisTempData &lt;- read.csv(&quot;GISTEMPData.csv&quot;, header = TRUE)
+gisTempData$Year.1 &lt;- NULL
+gisTempData$J.D &lt;- NULL
+gisTempData$D.N &lt;- NULL
+head(gisTempData, 5)
+</code></pre>
+
+<pre><code>##   Year Jan Feb Mar Apr  May  Jun Jul Aug Sep Oct Nov  Dec DJF MAM JJA SON
+## 1 1881 -79 -64 -37 -28   -5 -113 -54 -26 -37 -51 -59  -16 -66 -23 -64 -49
+## 2 1882   9 -14 -10 -60  -38 -103 -71 -13  -9 -33 -41  -68  -7 -36 -62 -27
+## 3 1883 -69 -96 -46 -32  -36   43  -2 -18 -47 -59 -71  -40 -78 -38   8 -59
+## 4 1884 -62 -37 -41 -96 -121  -84 -86  13 -38 -80 -83 -101 -46 -86 -52 -67
+## 5 1885 -92 -79 -91 -87  -49  -93 -61 -16 -15  -3 -39    2 -91 -76 -57 -19
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Shiny Application</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>I did not want to apply a model to try to infer how severe the problem is, my application is just a data visualization / exploration application. </p>
+
+<ul>
+<li>The application can be found at <a href="https://anfe67.shinyapps.io/DevDataProductsProj/">https://anfe67.shinyapps.io/DevDataProductsProj/</a></li>
+<li>This presentation can be found at: <a href="http://anfe67.github.io/DevDataProductsPres/">http://anfe67.github.io/DevDataProductsPres/</a></li>
+<li>The dataset I use can be found on my github page at <a href="https://github.com/anfe67/DevDataProductsProj/">https://github.com/anfe67/DevDataProductsProj/</a></li>
+</ul>
+
+<p>I selected shades of the same color for the seasons: Blues for Winter, Greens for Spring, Reds for Summer and Browns for Autumn (Fall). Seasons are plotted with dotted lines, while months are continuous. You can select the months and seasons with a group of check boxes (checkboxGroupInput) and the time frame by using a “range” type slider.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Graphs types</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The types of plots that you can get from the application look similar to this plot.</p>
+
+<p><img src="assets/fig/unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" width="800px" /></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Motivation'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Data'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Shiny Application'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Graphs types'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
